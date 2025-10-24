@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<!DOCTYPE html>
-<!DOCTYPE html>
-<!DOCTYPE html>
-<!DOCTYPE html>
-
-
-
 
 
 
@@ -15,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iFix Pro - Ремонт iPhone</title>
+    <title>CofeIT- Ремонт iPhone</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Сброс стилей и базовые настройки */
@@ -546,7 +538,7 @@
         <div class="container">
             <div class="logo">
                 <div class="logo-icon"></div>
-                iFix Pro
+                COFEIT
             </div>
             <ul class="nav-links">
                 <li><a href="#services">Услуги</a></li>
@@ -697,7 +689,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>iFix Pro</h3>
+                    <h3>COFEIT</h3>
                     <p>Профессиональный ремонт устройств Apple с 2010 года.</p>
                 </div>
                 <div class="footer-column">
@@ -726,7 +718,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 iFix Pro. Все права защищены.</p>
+                <p>&copy; 2025 COFEIT. Все права защищены.</p>
             </div>
         </div>
     </footer>
