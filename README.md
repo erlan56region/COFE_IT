@@ -1,454 +1,262 @@
-
-
-
-
-
+Сайт в разработке 
+Сайт в разработке 
+Сайт в разработке 
+Сайт в разработке 
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CofeIT- Ремонт iPhone</title>
+    <title>Apple Service Pro - Ремонт техники Apple</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Сброс стилей и базовые настройки */
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #000000;
+            --accent-color: #007AFF;
+            --text-color: #1D1D1F;
+            --gray-color: #86868B;
+            --transition-time: 0.6s;
+            --card-bg: #F5F5F7;
+            --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-in-out-back: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .dark-theme {
+            --primary-color: #000000;
+            --secondary-color: #ffffff;
+            --accent-color: #0A84FF;
+            --text-color: #F5F5F7;
+            --gray-color: #86868B;
+            --card-bg: #1D1D1F;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
-        }
-
-        :root {
-            --primary-color: #007AFF;
-            --secondary-color: #5856D6;
-            --text-primary: #1D1D1F;
-            --text-secondary: #86868B;
-            --background: #FFFFFF;
-            --card-background: #F5F5F7;
-            --nav-background: rgba(255, 255, 255, 0.8);
-            --border-radius: 12px;
-            --spacing-xs: 8px;
-            --spacing-sm: 16px;
-            --spacing-md: 24px;
-            --spacing-lg: 32px;
-            --spacing-xl: 48px;
-            --spacing-xxl: 64px;
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Темная тема */
-        body.dark-theme {
-            --primary-color: #0A84FF;
-            --secondary-color: #5E5CE6;
-            --text-primary: #F5F5F7;
-            --text-secondary: #AEAEB2;
-            --background: #1C1C1E;
-            --card-background: #2C2C2E;
-            --nav-background: rgba(28, 28, 30, 0.8);
         }
 
         body {
-            background-color: var(--background);
-            color: var(--text-primary);
-            line-height: 1.5;
-            overflow-x: hidden;
-            transition: var(--transition);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            line-height: 1.6;
+            transition: background-color var(--transition-time) var(--ease-out-quint), 
+                        color var(--transition-time) var(--ease-out-quint);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 var(--spacing-sm);
+            padding: 2rem;
         }
 
-        /* Навигация */
-        nav {
+        /* Header Styles */
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: var(--spacing-sm) 0;
-            position: sticky;
-            top: 0;
-            background-color: var(--nav-background);
-            backdrop-filter: blur(20px);
-            z-index: 100;
-            transition: var(--transition);
+            margin-bottom: 3rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--gray-color);
+            animation: slideDown 0.8s var(--ease-out-quint) forwards;
+            opacity: 0;
+            transform: translateY(-20px);
         }
 
         .logo {
             display: flex;
             align-items: center;
-            font-weight: 600;
-            font-size: 1.25rem;
-        }
-
-        .logo-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: var(--spacing-xs);
-            background-color: var(--primary-color);
-            border-radius: 6px;
-            transition: var(--transition);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: var(--spacing-md);
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-primary);
-        }
-
-        /* Переключатель темы */
-        .theme-toggle {
-            display: flex;
-            align-items: center;
-            margin-left: var(--spacing-md);
-            cursor: pointer;
-            position: relative;
-        }
-
-        .toggle-track {
-            width: 50px;
-            height: 24px;
-            background-color: var(--card-background);
-            border-radius: 50px;
-            position: relative;
-            transition: var(--transition);
-            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .toggle-thumb {
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 20px;
-            height: 20px;
-            background-color: white;
-            border-radius: 50%;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .toggle-icon {
-            font-size: 12px;
-            transition: var(--transition);
-        }
-
-        .sun-icon {
-            color: #FF9500;
-        }
-
-        .moon-icon {
-            color: #8E8E93;
-        }
-
-        body.dark-theme .toggle-track {
-            background-color: var(--primary-color);
-        }
-
-        body.dark-theme .toggle-thumb {
-            transform: translateX(26px);
-        }
-
-        body.dark-theme .sun-icon {
-            opacity: 0;
-            transform: rotate(90deg);
-        }
-
-        body.dark-theme .moon-icon {
-            opacity: 1;
-            transform: rotate(0);
-        }
-
-        body:not(.dark-theme) .sun-icon {
-            opacity: 1;
-            transform: rotate(0);
-        }
-
-        body:not(.dark-theme) .moon-icon {
-            opacity: 0;
-            transform: rotate(-90deg);
-        }
-
-        /* Герой секция */
-        .hero {
-            padding: var(--spacing-xxl) 0;
-            text-align: center;
-            background: linear-gradient(135deg, var(--card-background) 0%, var(--background) 100%);
-            transition: var(--transition);
-        }
-
-        .hero h1 {
-            font-size: 3rem;
+            gap: 12px;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: var(--spacing-sm);
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: var(--transition);
+            color: var(--text-color);
+            transition: all 0.3s var(--ease-out-quint);
         }
 
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto var(--spacing-lg);
-            transition: var(--transition);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: var(--spacing-sm) var(--spacing-lg);
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: var(--border-radius);
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: #0056CC;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(0, 122, 255, 0.1);
-        }
-
-        /* Секция услуг */
-        .services {
-            padding: var(--spacing-xxl) 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: var(--spacing-xl);
-            transition: var(--transition);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--spacing-lg);
-        }
-
-        .service-card {
-            background-color: var(--card-background);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-lg);
-            transition: var(--transition);
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .service-icon {
-            width: 48px;
-            height: 48px;
-            background-color: var(--primary-color);
-            border-radius: 12px;
-            margin-bottom: var(--spacing-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.25rem;
-            transition: var(--transition);
-        }
-
-        .service-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: var(--spacing-sm);
-            transition: var(--transition);
-        }
-
-        .service-card p {
-            color: var(--text-secondary);
-            margin-bottom: var(--spacing-md);
-            transition: var(--transition);
-        }
-
-        /* Галерея работ */
-        .gallery {
-            padding: var(--spacing-xxl) 0;
-            background-color: var(--card-background);
-            transition: var(--transition);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: var(--spacing-md);
-        }
-
-        .gallery-item {
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            position: relative;
-            aspect-ratio: 1 / 1;
-            background-color: var(--background);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .gallery-item:hover img {
+        .logo:hover {
             transform: scale(1.05);
         }
 
-        /* Секция преимуществ */
-        .advantages {
-            padding: var(--spacing-xxl) 0;
+        .logo i {
+            color: var(--accent-color);
+            transition: transform 0.6s var(--ease-out-quint);
         }
 
-        .advantages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--spacing-lg);
+        .logo:hover i {
+            transform: rotate(15deg) scale(1.2);
         }
 
-        .advantage-item {
-            text-align: center;
-            padding: var(--spacing-lg);
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
         }
 
-        .advantage-icon {
-            width: 64px;
-            height: 64px;
-            background-color: var(--primary-color);
-            border-radius: 16px;
-            margin: 0 auto var(--spacing-md);
+        .theme-toggle, .contact-btn {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            padding: 10px 20px;
+            border-radius: 25px;
+            color: var(--accent-color);
+            cursor: pointer;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 8px;
+            transition: all 0.4s var(--ease-out-quint);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-toggle::before, .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .theme-toggle:hover::before, .contact-btn:hover::before {
+            left: 100%;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-color);
             color: white;
-            font-size: 1.5rem;
-            transition: var(--transition);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,122,255,0.3);
         }
 
-        .advantage-item h3 {
-            font-size: 1.25rem;
-            margin-bottom: var(--spacing-sm);
-            transition: var(--transition);
-        }
-
-        .advantage-item p {
-            color: var(--text-secondary);
-            transition: var(--transition);
-        }
-
-        /* Футер */
-        footer {
-            background-color: var(--text-primary);
-            color: white;
-            padding: var(--spacing-xxl) 0 var(--spacing-lg);
-            transition: var(--transition);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--spacing-xl);
-            margin-bottom: var(--spacing-xl);
-        }
-
-        .footer-column h3 {
-            font-size: 1.125rem;
-            margin-bottom: var(--spacing-md);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .footer-links a {
-            color: #86868B;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover {
+        .contact-btn {
+            background: var(--accent-color);
             color: white;
         }
 
-        .footer-bottom {
+        .contact-btn:hover {
+            background: #0056CC;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,122,255,0.3);
+        }
+
+        /* Hero Section */
+        .hero {
             text-align: center;
-            padding-top: var(--spacing-lg);
-            border-top: 1px solid #333336;
-            color: #86868B;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s var(--ease-out-quint) 0.3s forwards;
+            opacity: 0;
+            transform: translateY(30px);
         }
 
-        /* Анимации для плавного появления элементов */
-        @keyframes fadeInUp {
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-color), #5856D6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            border-radius: 3px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--gray-color);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            animation: fadeIn 1s var(--ease-out-quint) 0.6s forwards;
+            opacity: 0;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: var(--card-bg);
+            transition: all 0.4s var(--ease-out-quint);
+            animation: fadeIn 0.8s var(--ease-out-quint) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .feature:nth-child(1) { animation-delay: 0.8s; }
+        .feature:nth-child(2) { animation-delay: 1s; }
+        .feature:nth-child(3) { animation-delay: 1.2s; }
+
+        .feature:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature i {
+            color: var(--accent-color);
+            transition: transform 0.4s var(--ease-out-quint);
+        }
+
+        .feature:hover i {
+            transform: scale(1.3) rotate(10deg);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transform: translateY(0) scale(1);
+            transition: all 0.5s var(--ease-out-quint);
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.05);
+            opacity: 0;
+            animation: cardAppear 0.8s var(--ease-out-quint) forwards;
+        }
+
+        @keyframes cardAppear {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px) scale(0.95);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
 
-        .animate-fade-in-up {
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-
-        .service-card, .gallery-item, .advantage-item {
-            opacity: 0;
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-
-        /* Задержки для анимации появления карточек */
         .service-card:nth-child(1) { animation-delay: 0.1s; }
         .service-card:nth-child(2) { animation-delay: 0.2s; }
         .service-card:nth-child(3) { animation-delay: 0.3s; }
@@ -456,341 +264,1179 @@
         .service-card:nth-child(5) { animation-delay: 0.5s; }
         .service-card:nth-child(6) { animation-delay: 0.6s; }
 
-        /* Адаптивность для мобильных устройств */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background-color: var(--background);
-                flex-direction: column;
-                padding: var(--spacing-md);
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-                transition: var(--transition);
-            }
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
 
-            .nav-links.active {
-                display: flex;
-            }
+        .service-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            background: linear-gradient(135deg, var(--accent-color), #5856D6);
+            transition: all 0.6s var(--ease-out-quint);
+            position: relative;
+            overflow: hidden;
+        }
 
-            .mobile-menu-btn {
-                display: block;
-            }
+        .service-card:hover .service-image {
+            transform: scale(1.1);
+        }
 
-            .hero h1 {
-                font-size: 2rem;
-            }
+        .service-image i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            color: white;
+            transition: all 0.6s var(--ease-out-quint);
+        }
 
-            .hero p {
-                font-size: 1rem;
-            }
+        .service-card:hover .service-image i {
+            transform: translate(-50%, -50%) scale(1.2) rotate(10deg);
+        }
 
-            .section-title {
-                font-size: 1.75rem;
-            }
+        .service-info {
+            padding: 1.8rem;
+            position: relative;
+            z-index: 1;
+        }
 
-            .theme-toggle {
-                margin-left: auto;
-                margin-right: var(--spacing-md);
+        .service-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s var(--ease-out-quint);
+        }
+
+        .service-card:hover .service-name {
+            color: var(--accent-color);
+        }
+
+        .service-name i {
+            color: var(--accent-color);
+            transition: transform 0.4s var(--ease-out-quint);
+        }
+
+        .service-card:hover .service-name i {
+            transform: scale(1.3);
+        }
+
+        .service-description {
+            color: var(--gray-color);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            transition: color 0.3s var(--ease-out-quint);
+        }
+
+        .service-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            transition: all 0.4s var(--ease-out-quint);
+        }
+
+        .service-card:hover .service-price {
+            transform: scale(1.1);
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s var(--ease-out-quint);
+        }
+
+        .service-card:hover .service-features li {
+            transform: translateX(5px);
+        }
+
+        .service-features li:nth-child(1) { transition-delay: 0.05s; }
+        .service-features li:nth-child(2) { transition-delay: 0.1s; }
+        .service-features li:nth-child(3) { transition-delay: 0.15s; }
+        .service-features li:nth-child(4) { transition-delay: 0.2s; }
+
+        .service-features i {
+            color: #34C759;
+            font-size: 0.9rem;
+            transition: transform 0.4s var(--ease-out-quint);
+        }
+
+        .service-card:hover .service-features i {
+            transform: scale(1.3) rotate(15deg);
+        }
+
+        .service-button {
+            width: 100%;
+            padding: 12px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.4s var(--ease-out-quint);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .service-button:hover::before {
+            left: 100%;
+        }
+
+        .service-button:hover {
+            background: #0056CC;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,122,255,0.3);
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            margin-top: 5rem;
+            padding: 3rem 0;
+        }
+
+        .portfolio h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-color);
+            animation: fadeIn 1s var(--ease-out-quint) 0.5s forwards;
+            opacity: 0;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .portfolio-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.5s var(--ease-out-quint);
+            background: var(--card-bg);
+            border: 1px solid rgba(0,0,0,0.05);
+            opacity: 0;
+            animation: fadeInUp 0.8s var(--ease-out-quint) forwards;
+        }
+
+        .portfolio-item:nth-child(1) { animation-delay: 0.1s; }
+        .portfolio-item:nth-child(2) { animation-delay: 0.2s; }
+        .portfolio-item:nth-child(3) { animation-delay: 0.3s; }
+        .portfolio-item:nth-child(4) { animation-delay: 0.4s; }
+        .portfolio-item:nth-child(5) { animation-delay: 0.5s; }
+        .portfolio-item:nth-child(6) { animation-delay: 0.6s; }
+        .portfolio-item:nth-child(7) { animation-delay: 0.7s; }
+        .portfolio-item:nth-child(8) { animation-delay: 0.8s; }
+
+        .portfolio-item:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s var(--ease-out-quint);
+        }
+
+        .portfolio-item:hover .portfolio-image {
+            transform: scale(1.1);
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .portfolio-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            transition: color 0.3s var(--ease-out-quint);
+        }
+
+        .portfolio-item:hover .portfolio-title {
+            color: var(--accent-color);
+        }
+
+        .portfolio-description {
+            color: var(--gray-color);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Loading States */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            font-size: 1.2rem;
+            color: var(--gray-color);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--accent-color);
+            border-left: 4px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 1rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.4s var(--ease-out-quint) forwards;
+        }
+
+        .modal-content {
+            background: var(--primary-color);
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transform: scale(0.9);
+            animation: modalAppear 0.5s var(--ease-out-quint) forwards;
+        }
+
+        @keyframes modalAppear {
+            to {
+                transform: scale(1);
             }
         }
 
-        /* Адаптивность для 4K мониторов */
-        @media (min-width: 2000px) {
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: all 0.3s var(--ease-out-quint);
+        }
+
+        .modal-close:hover {
+            color: var(--accent-color);
+            transform: scale(1.2) rotate(90deg);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 5rem;
+            padding: 3rem 0;
+            border-top: 1px solid var(--gray-color);
+            text-align: center;
+            color: var(--gray-color);
+            animation: fadeIn 1s var(--ease-out-quint) 0.7s forwards;
+            opacity: 0;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.4s var(--ease-out-quint);
+            padding: 10px 15px;
+            border-radius: 10px;
+        }
+
+        .contact-item:hover {
+            background: var(--card-bg);
+            transform: translateY(-5px);
+        }
+
+        .phone-number {
+            cursor: pointer;
+            transition: all 0.3s var(--ease-out-quint);
+            position: relative;
+        }
+
+        .phone-number:hover {
+            color: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        .phone-number::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.4s var(--ease-out-quint);
+        }
+
+        .phone-number:hover::after {
+            width: 100%;
+        }
+
+        /* Animations */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s var(--ease-out-quint) forwards;
+        }
+
+        /* Particles Background */
+        .particles-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0.15;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0.1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
             .container {
-                max-width: 1800px;
+                padding: 1rem;
             }
-
+            
+            .header {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
             .hero h1 {
-                font-size: 4rem;
+                font-size: 2.5rem;
             }
-
-            .hero p {
-                font-size: 1.5rem;
-                max-width: 800px;
+            
+            .services-grid {
+                grid-template-columns: 1fr;
             }
-
-            .section-title {
-                font-size: 3.5rem;
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
             }
-
-            .services-grid, .gallery-grid, .advantages-grid {
-                gap: var(--spacing-xl);
+            
+            .features {
+                flex-direction: column;
+                align-items: center;
             }
-
-            .service-card, .advantage-item {
-                padding: var(--spacing-xl);
-            }
-
-            .service-icon, .advantage-icon {
-                width: 64px;
-                height: 64px;
-                font-size: 1.5rem;
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Навигация -->
-    <nav>
-        <div class="container">
+    <!-- Particles Background -->
+    <div class="particles-background" id="particlesBackground"></div>
+
+    <div class="container">
+        <header class="header">
             <div class="logo">
-                <div class="logo-icon"></div>
-                COFEIT
+                <i class="fab fa-apple"></i>
+                <span>Apple Service Pro</span>
             </div>
-            <ul class="nav-links">
-                <li><a href="#services">Услуги</a></li>
-                <li><a href="#gallery">Работы</a></li>
-                <li><a href="#advantages">Преимущества</a></li>
-                <li><a href="#contact">Контакты</a></li>
-            </ul>
-            <div class="theme-toggle" id="themeToggle">
-                <div class="toggle-track">
-                    <div class="toggle-thumb">
-                        <i class="fas fa-sun toggle-icon sun-icon"></i>
-                        <i class="fas fa-moon toggle-icon moon-icon"></i>
-                    </div>
-                </div>
+            <div class="nav-buttons">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                    Тёмная тема
+                </button>
+                <button class="contact-btn" id="contactBtn">
+                    <i class="fas fa-phone"></i>
+                    Связаться
+                </button>
             </div>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-
-    <!-- Герой секция -->
-    <section class="hero">
-        <div class="container">
-            <h1>Профессиональный ремонт iPhone</h1>
-            <p>Официальный сервисный центр Apple. Качественный ремонт вашего устройства с гарантией.</p>
-            <div style="display: flex; gap: var(--spacing-sm); justify-content: center; flex-wrap: wrap;">
-                <a href="#contact" class="btn">Записаться на ремонт</a>
-                <a href="#services" class="btn btn-secondary">Наши услуги</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Секция услуг -->
-    <section class="services" id="services">
-        <div class="container">
-            <h2 class="section-title">Наши услуги</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
-                    <h3>Замена дисплея</h3>
-                    <p>Профессиональная замена экрана на оригинальные компоненты с калибровкой True Tone.</p>
-                    <a href="#" class="btn btn-secondary">Подробнее</a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-battery-three-quarters"></i></div>
-                    <h3>Замена аккумулятора</h3>
-                    <p>Установка новых оригинальных аккумуляторов с восстановлением индикации здоровья батареи.</p>
-                    <a href="#" class="btn btn-secondary">Подробнее</a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-camera"></i></div>
-                    <h3>Ремонт камеры</h3>
-                    <p>Диагностика и ремонт систем камер, включая замену объективов и сенсоров.</p>
-                    <a href="#" class="btn btn-secondary">Подробнее</a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-tint"></i></div>
-                    <h3>Устранение последствий попадания влаги</h3>
-                    <p>Чистка платы, восстановление контактов и замена поврежденных компонентов.</p>
-                    <a href="#" class="btn btn-secondary">Подробнее</a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-bolt"></i></div>
-                    <h3>Ремонт систем питания</h3>
-                    <p>Диагностика и ремонт цепей питания, замена контроллеров и восстановление стабильной работы.</p>
-                    <a href="#" class="btn btn-secondary">Подробнее</a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-volume-up"></i></div>
-                    <h3>Ремонт динамиков и микрофонов</h3>
-                    <p>Замена аудиокомпонентов с сохранением водозащиты и качества звука.</p>
-                    <a href="#" class="btn btn-secondary">Подробнее</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Галерея работ -->
-    <section class="gallery" id="gallery">
-        <div class="container">
-            <h2 class="section-title">Примеры наших работ</h2>
-            <div class="gallery-grid">
-                <!-- Здесь будут 10 изображений примеров работ -->
-                <div class="gallery-item">
-                    <div>Замена дисплея iPhone 15 Pro</div>
-                </div>
-                <div class="gallery-item">
-                    <div>Ремонт после попадания влаги</div>
-                </div>
-                <div class="gallery-item">
-                    <div>Замена аккумулятора iPhone 14</div>
-                </div>
-                <div class="gallery-item">
-                    <div>Ремонт камеры iPhone 13 Pro</div>
-                </div>
-                <div class="gallery-item">
-                    <div>Замена корпуса iPhone 12</div>
-                </div>
-                <div class="gallery-item">
-                    <div>Ремонт системной платы</div>
-                </div>
-                <div class="gallery-item">
-                    <div>Восстановление после падения</div>
-                </div>
-                <div class="gallery-item">
-                    <div>Замена разъема Lightning</div>
-                </div>
-                <div class="gallery-item">
-                    <div>Ремонт кнопок и переключателей</div>
-                </div>
-                <div class="gallery-item">
-                    <div>Обслуживание iPhone 15 Pro Max</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Секция преимуществ -->
-    <section class="advantages" id="advantages">
-        <div class="container">
-            <h2 class="section-title">Почему выбирают нас</h2>
-            <div class="advantages-grid">
-                <div class="advantage-item">
-                    <div class="advantage-icon"><i class="fas fa-check-circle"></i></div>
-                    <h3>Оригинальные запчасти</h3>
-                    <p>Используем только оригинальные компоненты Apple с сохранением всех функций.</p>
-                </div>
-                <div class="advantage-item">
-                    <div class="advantage-icon"><i class="fas fa-user-tie"></i></div>
-                    <h3>Опытные мастера</h3>
-                    <p>Наши специалисты прошли сертификацию Apple и имеют многолетний опыт.</p>
-                </div>
-                <div class="advantage-item">
-                    <div class="advantage-icon"><i class="fas fa-clock"></i></div>
-                    <h3>Быстрый ремонт</h3>
-                    <p>Большинство ремонтов выполняем в течение 1-2 часов в вашем присутствии.</p>
-                </div>
-                <div class="advantage-item">
-                    <div class="advantage-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Гарантия качества</h3>
-                    <p>Предоставляем гарантию до 12 месяцев на все виды ремонтных работ.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Футер -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>COFEIT</h3>
-                    <p>Профессиональный ремонт устройств Apple с 2010 года.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Контакты</h3>
-                    <ul class="footer-links">
-                        <li><a href="tel:+78001234567">+7 (800) 123-45-67</a></li>
-                        <li><a href="mailto:info@ifixpro.ru">info@ifixpro.ru</a></li>
-                        <li>Москва, ул. Тверская, д. 10</li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Часы работы</h3>
-                    <ul class="footer-links">
-                        <li>Пн-Пт: 10:00 - 20:00</li>
-                        <li>Сб-Вс: 11:00 - 18:00</li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Услуги</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Ремонт iPhone</a></li>
-                        <li><a href="#">Ремонт iPad</a></li>
-                        <li><a href="#">Ремонт MacBook</a></li>
-                        <li><a href="#">Ремонт Apple Watch</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 COFEIT. Все права защищены.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Мобильное меню
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
-
-        // Плавная прокрутка для якорных ссылок
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Закрываем мобильное меню после клика
-                    document.querySelector('.nav-links').classList.remove('active');
-                }
-            });
-        });
-
-        // Переключатель темы
-        const themeToggle = document.getElementById('themeToggle');
-        const body = document.body;
+        </header>
         
-        // Проверяем сохраненную тему в localStorage или системные настройки
-        const savedTheme = localStorage.getItem('theme') || 
-                          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        
-        // Применяем сохраненную тему
-        if (savedTheme === 'dark') {
-            body.classList.add('dark-theme');
-        }
-        
-        // Обработчик переключения темы
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-theme');
+        <section class="hero">
+            <h1>Профессиональный ремонт техники Apple</h1>
+            <p>Официальный сервисный центр с оригинальными запчастями и гарантией до 2 лет. Вернём ваше устройство к жизни в кратчайшие сроки!</p>
             
-            // Сохраняем выбор пользователя
-            const isDark = body.classList.contains('dark-theme');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        });
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Оригинальные запчасти</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Гарантия до 2 лет</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Бесплатная диагностика</span>
+                </div>
+            </div>
+        </section>
+        
+        <main>
+            <div class="services-grid" id="servicesGrid">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    Загружаем услуги...
+                </div>
+            </div>
+        </main>
 
-        // Анимация появления элементов при прокрутке
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+        <!-- Раздел с примерами работ -->
+        <section class="portfolio" id="portfolio">
+            <h2>Примеры наших работ</h2>
+            <div class="portfolio-grid" id="portfolioGrid">
+                <!-- Portfolio items will be generated by JavaScript -->
+            </div>
+        </section>
+        
+        <footer class="footer">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Пн-Вс: 9:00-21:00</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span class="phone-number" id="footerPhone">+7 (495) 123-45-67</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Москва, ул. Тверская, 15</span>
+                </div>
+            </div>
+            <p>© 2025 Apple Service Pro. Мы не являемся официальным представителем Apple Inc.</p>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Связаться с нами</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span class="phone-number" id="modalPhone">+7 (495) 123-45-67</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Москва, ул. Тверская, 15</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Пн-Вс: 9:00-21:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Modern Animation Engine 2025
+        class AnimationEngine2025 {
+            constructor() {
+                this.observers = [];
+                this.init();
+            }
+
+            init() {
+                this.setupScrollAnimations();
+                this.setupHoverAnimations();
+                this.setupParticleBackground();
+            }
+
+            setupScrollAnimations() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            this.animateOnScroll(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+
+                document.querySelectorAll('.service-card, .portfolio-item, .feature').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+
+            animateOnScroll(element) {
+                if (element.classList.contains('service-card') || element.classList.contains('portfolio-item')) {
+                    element.style.animationPlayState = 'running';
+                }
+            }
+
+            setupHoverAnimations() {
+                // Добавляем дополнительные hover-эффекты
+                document.addEventListener('mousemove', (e) => {
+                    this.handleMouseMove(e);
+                });
+            }
+
+            handleMouseMove(e) {
+                const cards = document.querySelectorAll('.service-card, .portfolio-item');
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    if (x > 0 && x < rect.width && y > 0 && y < rect.height) {
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        
+                        const angleY = (x - centerX) / 25;
+                        const angleX = (centerY - y) / 25;
+                        
+                        card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale3d(1.02, 1.02, 1.02)`;
+                    } else {
+                        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                    }
+                });
+            }
+
+            setupParticleBackground() {
+                const particlesContainer = document.getElementById('particlesBackground');
+                const particleCount = 30;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    
+                    const size = Math.random() * 60 + 10;
+                    const posX = Math.random() * 100;
+                    const delay = Math.random() * 20;
+                    const duration = Math.random() * 20 + 20;
+                    
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.left = `${posX}%`;
+                    particle.style.animationDelay = `${delay}s`;
+                    particle.style.animationDuration = `${duration}s`;
+                    
+                    particlesContainer.appendChild(particle);
+                }
+            }
+
+            createRipple(event) {
+                const button = event.currentTarget;
+                const circle = document.createElement('span');
+                const diameter = Math.max(button.clientWidth, button.clientHeight);
+                const radius = diameter / 2;
+
+                circle.style.width = circle.style.height = `${diameter}px`;
+                circle.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
+                circle.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
+                circle.classList.add('ripple');
+
+                const ripple = button.getElementsByClassName('ripple')[0];
+                if (ripple) {
+                    ripple.remove();
+                }
+
+                button.appendChild(circle);
+            }
+        }
+
+        // Константы и данные
+        const APPLE_SERVICES = Object.freeze([
+            {
+                id: 1,
+                name: "Ремонт iPhone",
+                icon: "fas fa-mobile-alt",
+                description: "Полный спектр услуг по ремонту iPhone любой модели. Замена экрана, аккумулятора, камеры и других компонентов.",
+                price: "от 1 990 ₽",
+                features: ["Диагностика бесплатно", "Оригинальные дисплеи", "Гарантия 1 год", "Ремонт за 30 минут"],
+                color: "linear-gradient(135deg, #007AFF, #5856D6)"
+            },
+            {
+                id: 2,
+                name: "Ремонт MacBook",
+                icon: "fas fa-laptop",
+                description: "Профессиональный ремонт MacBook всех поколений. Чистка, замена клавиатуры, матрицы и ремонт материнской платы.",
+                price: "от 3 990 ₽",
+                features: ["Бесплатная диагностика", "Оригинальные запчасти", "Срочный ремонт", "Гарантия 2 года"],
+                color: "linear-gradient(135deg, #34C759, #30D158)"
+            },
+            {
+                id: 3,
+                name: "Ремонт iPad",
+                icon: "fas fa-tablet-alt",
+                description: "Качественный ремонт iPad и iPad Pro. Восстановление экрана, замена батареи, ремонт после попадания влаги.",
+                price: "от 2 490 ₽",
+                features: ["Оригинальные стекла", "Сохранение данных", "Ремонт за 1 день", "Гарантия 1 год"],
+                color: "linear-gradient(135deg, #FF2D55, #FF375F)"
+            },
+            {
+                id: 4,
+                name: "Ремонт Apple Watch",
+                icon: "fas fa-clock",
+                description: "Ремонт умных часов Apple Watch. Замена стекла, дисплея, корпуса и аккумулятора.",
+                price: "от 1 790 ₽",
+                features: ["Оригинальные детали", "Герметизация", "Ремонт за 2 часа", "Гарантия 6 месяцев"],
+                color: "linear-gradient(135deg, #FF9500, #FF9F0A)"
+            },
+            {
+                id: 5,
+                name: "Ремонт AirPods",
+                icon: "fas fa-headphones",
+                description: "Восстановление работы AirPods. Замена аккумуляторов, ремонт кейсов, чистка динамиков.",
+                price: "от 990 ₽",
+                features: ["Оригинальные батареи", "Чистка ультразвуком", "Ремонт за 1 час", "Гарантия 3 месяца"],
+                color: "linear-gradient(135deg, #BF5AF2, #BF5AF2)"
+            },
+            {
+                id: 6,
+                name: "Восстановление данных",
+                icon: "fas fa-hdd",
+                description: "Срочное восстановление данных с любых устройств Apple после сбоев, падений и попадания жидкости.",
+                price: "от 2 990 ₽",
+                features: ["Бесплатный анализ", "Высокая вероятность", "Конфиденциальность", "Срочное выполнение"],
+                color: "linear-gradient(135deg, #32D74B, #30D158)"
+            }
+        ]);
+
+        const PORTFOLIO_ITEMS = Object.freeze([
+            {
+                id: 1,
+                title: "Замена дисплея iPhone 12 Pro",
+                description: "Полная замена OLED-дисплея с сохранением оригинального True Tone. Устройство работает как новое!",
+                image: "https://images.unsplash.com/photo-1605236453806-6ff36851218e?w=600&h=400&fit=crop",
+                category: "iPhone"
+            },
+            {
+                id: 2,
+                title: "Чистка и замена термопасты MacBook Pro",
+                description: "Профилактическая чистка системы охлаждения и замена термоинтерфейса. Устранены перегревы.",
+                image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&h=400&fit=crop",
+                category: "MacBook"
+            },
+            {
+                id: 3,
+                title: "Восстановление iPad Air после падения",
+                description: "Замена стекла и дигитайзера с калибровкой сенсорного слоя. Экран снова идеально откликается.",
+                image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&h=400&fit=crop",
+                category: "iPad"
+            },
+            {
+                id: 4,
+                title: "Ремонт Apple Watch Series 6",
+                description: "Замена аккумулятора и герметизация корпуса для сохранения водонепроницаемости.",
+                image: "https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=600&h=400&fit=crop",
+                category: "Apple Watch"
+            },
+            {
+                id: 5,
+                title: "Замена клавиатуры MacBook Pro",
+                description: "Установка новой клавиатуры с полной калибровкой и тестированием всех клавиш.",
+                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=400&fit=crop",
+                category: "MacBook"
+            },
+            {
+                id: 6,
+                title: "Восстановление данных с поврежденного iPhone",
+                description: "Спасение важной информации после серьезного повреждения устройства водой.",
+                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop",
+                category: "Восстановление данных"
+            },
+            {
+                id: 7,
+                title: "Ремонт материнской платы MacBook",
+                description: "Комплексный ремонт материнской платы с заменой компонентов BGA-пайки.",
+                image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=600&h=400&fit=crop",
+                category: "MacBook"
+            },
+            {
+                id: 8,
+                title: "Замена корпуса iPhone 13",
+                description: "Полная замена корпуса с сохранением всех оригинальных компонентов.",
+                image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=400&fit=crop",
+                category: "iPhone"
+            }
+        ]);
+
+        // Утилиты
+        const createElement = (tag, classes = [], attributes = {}) => {
+            const element = document.createElement(tag);
+            if (classes.length) element.classList.add(...classes);
+            Object.entries(attributes).forEach(([key, value]) => {
+                element.setAttribute(key, value);
+            });
+            return element;
         };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-in-up');
-                    observer.unobserve(entry.target);
-                }
+        const animateOnScroll = (elements, options = {}) => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px',
+                ...options
             });
-        }, observerOptions);
 
-        // Наблюдаем за карточками услуг, галереи и преимуществ
-        document.querySelectorAll('.service-card, .gallery-item, .advantage-item').forEach(el => {
-            observer.observe(el);
+            elements.forEach(element => observer.observe(element));
+        };
+
+        const debounce = (func, wait) => {
+            let timeout;
+            return (...args) => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        };
+
+        // Класс приложения
+        class AppleServiceApp {
+            #servicesGrid;
+            #portfolioGrid;
+            #themeToggle;
+            #contactBtn;
+            #contactModal;
+            #modalClose;
+            #footerPhone;
+            #modalPhone;
+            #isDarkTheme = false;
+            #animationEngine;
+
+            constructor() {
+                this.#initializeElements();
+                this.#init();
+            }
+
+            #initializeElements() {
+                this.#servicesGrid = document.getElementById('servicesGrid');
+                this.#portfolioGrid = document.getElementById('portfolioGrid');
+                this.#themeToggle = document.getElementById('themeToggle');
+                this.#contactBtn = document.getElementById('contactBtn');
+                this.#contactModal = document.getElementById('contactModal');
+                this.#modalClose = document.getElementById('modalClose');
+                this.#footerPhone = document.getElementById('footerPhone');
+                this.#modalPhone = document.getElementById('modalPhone');
+            }
+
+            #init() {
+                this.#animationEngine = new AnimationEngine2025();
+                this.#loadServices();
+                this.#loadPortfolio();
+                this.#setupEventListeners();
+                this.#setupPhoneCallFunctionality();
+                this.#setupImageLoading();
+            }
+
+            async #loadServices() {
+                // Имитация загрузки данных
+                await this.#simulateLoading(1500);
+                this.#renderServices();
+            }
+
+            async #loadPortfolio() {
+                await this.#simulateLoading(1000);
+                this.#renderPortfolio();
+            }
+
+            #simulateLoading(delay) {
+                return new Promise(resolve => setTimeout(resolve, delay));
+            }
+
+            #renderServices() {
+                this.#servicesGrid.innerHTML = '';
+                
+                const serviceCards = APPLE_SERVICES.map(service => 
+                    this.#createServiceCard(service)
+                );
+                
+                this.#servicesGrid.append(...serviceCards);
+                this.#addServiceEventListeners();
+            }
+
+            #createServiceCard(service) {
+                const card = createElement('div', ['service-card', 'fade-in']);
+                
+                card.innerHTML = `
+                    <div class="service-image" style="background: ${service.color};">
+                        <i class="${service.icon}"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3 class="service-name">
+                            <i class="${service.icon}"></i>
+                            ${service.name}
+                        </h3>
+                        <p class="service-description">${service.description}</p>
+                        <div class="service-price">${service.price}</div>
+                        <ul class="service-features">
+                            ${service.features.map(feature => `
+                                <li><i class="fas fa-check"></i>${feature}</li>
+                            `).join('')}
+                        </ul>
+                        <button class="service-button" data-service="${service.name}">
+                            <i class="fas fa-tools"></i>
+                            Заказать ремонт
+                        </button>
+                    </div>
+                `;
+                
+                return card;
+            }
+
+            #renderPortfolio() {
+                const portfolioItems = PORTFOLIO_ITEMS.map(item => 
+                    this.#createPortfolioItem(item)
+                );
+                
+                this.#portfolioGrid.append(...portfolioItems);
+            }
+
+            #createPortfolioItem(item) {
+                const portfolioItem = createElement('div', ['portfolio-item', 'fade-in']);
+                
+                portfolioItem.innerHTML = `
+                    <img class="portfolio-image" 
+                         src="${item.image}" 
+                         alt="${item.title}"
+                         loading="lazy"
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRjVGNUY3Ii8+CjxwYXRoIGQ9Ik0zMDAgMjAwTDM1MCAyNTBMMzAwIDMwMEwyNTAgMjUwTDMwMCAyMDBaIiBmaWxsPSIjMDA3QUZGIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iMzUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM4Njg2OEIiPk5vIGltYWdlPC90ZXh0Pgo8L3N2Zz4K'">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">${item.title}</h3>
+                        <p class="portfolio-description">${item.description}</p>
+                        <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--accent-color);">
+                            <i class="fas fa-tag"></i> ${item.category}
+                        </div>
+                    </div>
+                `;
+                
+                return portfolioItem;
+            }
+
+            #setupImageLoading() {
+                // Ленивая загрузка изображений с Intersection Observer
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+
+                document.querySelectorAll('img[data-src]').forEach(img => {
+                    imageObserver.observe(img);
+                });
+            }
+
+            #addServiceEventListeners() {
+                const orderButtons = document.querySelectorAll('.service-button');
+                orderButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        this.#animationEngine.createRipple(e);
+                        const serviceName = button.dataset.service;
+                        this.#openOrderModal(serviceName);
+                    });
+                });
+            }
+
+            #setupEventListeners() {
+                // Theme toggle
+                this.#themeToggle.addEventListener('click', () => this.#toggleTheme());
+                
+                // Contact modal
+                this.#contactBtn.addEventListener('click', () => this.#openContactModal());
+                this.#modalClose.addEventListener('click', () => this.#closeContactModal());
+                
+                // Close modal on backdrop click
+                this.#contactModal.addEventListener('click', (e) => {
+                    if (e.target === this.#contactModal) {
+                        this.#closeContactModal();
+                    }
+                });
+
+                // Escape key to close modal
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.#contactModal.style.display === 'flex') {
+                        this.#closeContactModal();
+                    }
+                });
+
+                // Debounced resize handler
+                window.addEventListener('resize', debounce(() => this.#handleResize(), 250));
+            }
+
+            #setupPhoneCallFunctionality() {
+                // Добавляем функциональность вызова по нажатию на номер телефона
+                const phoneNumbers = [this.#footerPhone, this.#modalPhone];
+                
+                phoneNumbers.forEach(phoneElement => {
+                    phoneElement.addEventListener('click', () => {
+                        this.#initiatePhoneCall();
+                    });
+                    
+                    // Добавляем анимацию при нажатии
+                    phoneElement.addEventListener('mousedown', () => {
+                        phoneElement.style.transform = 'scale(0.95)';
+                    });
+                    
+                    phoneElement.addEventListener('mouseup', () => {
+                        phoneElement.style.transform = 'scale(1)';
+                    });
+                });
+            }
+
+            #initiatePhoneCall() {
+                const phoneNumber = '+74951234567';
+                
+                // Создаем красивую анимацию подтверждения вызова
+                const callModal = createElement('div');
+                callModal.innerHTML = `
+                    <div style="
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0,0,0,0.8);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        z-index: 2000;
+                        animation: fadeIn 0.3s ease;
+                    ">
+                        <div style="
+                            background: var(--primary-color);
+                            padding: 2rem;
+                            border-radius: 20px;
+                            text-align: center;
+                            max-width: 400px;
+                            width: 90%;
+                            animation: modalAppear 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+                        ">
+                            <div style="font-size: 4rem; color: var(--accent-color); margin-bottom: 1rem;">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h3 style="margin-bottom: 1rem; color: var(--text-color);">Вызов сервисного центра</h3>
+                            <p style="margin-bottom: 1.5rem; color: var(--gray-color);">
+                                Вызываем: <strong>+7 (495) 123-45-67</strong>
+                            </p>
+                            <div style="display: flex; gap: 1rem; justify-content: center;">
+                                <button id="confirmCall" style="
+                                    background: var(--accent-color);
+                                    color: white;
+                                    border: none;
+                                    padding: 10px 20px;
+                                    border-radius: 10px;
+                                    cursor: pointer;
+                                    font-weight: 600;
+                                ">Позвонить</button>
+                                <button id="cancelCall" style="
+                                    background: transparent;
+                                    color: var(--text-color);
+                                    border: 1px solid var(--gray-color);
+                                    padding: 10px 20px;
+                                    border-radius: 10px;
+                                    cursor: pointer;
+                                ">Отмена</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(callModal);
+                
+                // Обработчики для кнопок подтверждения/отмены
+                document.getElementById('confirmCall').addEventListener('click', () => {
+                    // Имитация звонка - в реальном приложении здесь будет window.location.href = 'tel:+74951234567'
+                    window.location.href = 'tel:' + phoneNumber;
+                    document.body.removeChild(callModal);
+                });
+                
+                document.getElementById('cancelCall').addEventListener('click', () => {
+                    document.body.removeChild(callModal);
+                });
+            }
+
+            #setupScrollAnimations() {
+                // Анимация для сервисных карточек
+                const serviceCards = document.querySelectorAll('.service-card');
+                const portfolioItems = document.querySelectorAll('.portfolio-item');
+                
+                animateOnScroll([...serviceCards, ...portfolioItems]);
+            }
+
+            #toggleTheme() {
+                this.#isDarkTheme = !this.#isDarkTheme;
+                document.body.classList.toggle('dark-theme', this.#isDarkTheme);
+                
+                const icon = this.#themeToggle.querySelector('i');
+                this.#themeToggle.innerHTML = this.#isDarkTheme 
+                    ? '<i class="fas fa-sun"></i> Светлая тема'
+                    : '<i class="fas fa-moon"></i> Тёмная тема';
+                
+                // Сохраняем тему в localStorage
+                localStorage.setItem('theme', this.#isDarkTheme ? 'dark' : 'light');
+            }
+
+            #openContactModal() {
+                this.#contactModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+
+            #closeContactModal() {
+                this.#contactModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            #openOrderModal(serviceName) {
+                this.#openContactModal();
+                // Можно добавить логику для предзаполнения формы заказа
+                console.log(`Selected service: ${serviceName}`);
+            }
+
+            #handleResize() {
+                // Логика для обработки изменения размера окна
+                console.log('Window resized');
+            }
+
+            // Публичные методы
+            loadTheme() {
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    this.#isDarkTheme = true;
+                    document.body.classList.add('dark-theme');
+                    this.#themeToggle.innerHTML = '<i class="fas fa-sun"></i> Светлая тема';
+                }
+            }
+        }
+
+        // Инициализация приложения
+        document.addEventListener('DOMContentLoaded', () => {
+            const app = new AppleServiceApp();
+            app.loadTheme();
         });
+
+        // Service Worker регистрация (опционально)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
     </script>
 </body>
 </html>
