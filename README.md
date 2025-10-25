@@ -1,4 +1,4 @@
-Сайт в разработке
+САЙТ В ДОРОБОКЕ
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
