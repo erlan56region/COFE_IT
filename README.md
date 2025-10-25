@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+САЙТ В ДОРОБОТКЕ
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
