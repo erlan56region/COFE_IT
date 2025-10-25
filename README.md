@@ -1,6 +1,4 @@
-Сайт в разработе 
-
-
+Сайт в разработке
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
