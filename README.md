@@ -63,7 +63,9 @@
             border-bottom: 1px solid var(--gray-color);
             background-color: var(--primary-color);
             z-index: 1000;
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        box-shadow 0.4s ease, 
+                        background-color var(--transition-time) ease;
             transform: translateY(0);
             height: var(--header-height);
             backdrop-filter: blur(10px);
@@ -114,6 +116,14 @@
             align-items: center;
             gap: 8px;
             transition: all 0.3s ease;
+        }
+
+        .theme-toggle:focus,
+        .contact-btn:focus,
+        .service-button:focus,
+        .scroll-to-top:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
         }
 
         .contact-btn {
@@ -370,7 +380,7 @@
 
         .modal-header {
             display: flex;
-            justify-content: between;
+            justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
         }
@@ -507,21 +517,19 @@
 </head>
 <body>
     <header class="header" id="mainHeader">
-        <div class="container">
-            <div class="logo">
-                <i class="fab fa-apple"></i>
-                <span>Apple Service Pro</span>
-            </div>
-            <div class="nav-buttons">
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
-                    Тёмная тема
-                </button>
-                <button class="contact-btn" id="contactBtn">
-                    <i class="fas fa-phone"></i>
-                    Связаться
-                </button>
-            </div>
+        <div class="logo">
+            <i class="fab fa-apple"></i>
+            <span>Apple Service Pro</span>
+        </div>
+        <div class="nav-buttons">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                Тёмная тема
+            </button>
+            <button class="contact-btn" id="contactBtn">
+                <i class="fas fa-phone"></i>
+                Связаться
+            </button>
         </div>
     </header>
     
@@ -588,10 +596,10 @@
     </button>
 
     <!-- Modal -->
-    <div class="modal" id="contactModal">
+    <div class="modal" id="contactModal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Связаться с нами</h3>
+                <h3 id="modalTitle">Связаться с нами</h3>
                 <button class="modal-close" id="modalClose">&times;</button>
             </div>
             <div class="contact-info">
@@ -781,6 +789,7 @@
             constructor() {
                 this.#initializeElements();
                 this.#init();
+                this.loadTheme();
             }
 
             #initializeElements() {
@@ -888,20 +897,12 @@
             }
 
             #setupImageLoading() {
-                // Ленивая загрузка изображений с Intersection Observer
-                const imageObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            img.src = img.dataset.src;
-                            imageObserver.unobserve(img);
-                        }
-                    });
-                });
-
-                document.querySelectorAll('img[data-src]').forEach(img => {
-                    imageObserver.observe(img);
-                });
+                // Глобальный обработчик ошибок загрузки изображений
+                document.addEventListener('error', (e) => {
+                    if (e.target.tagName === 'IMG' && e.target.classList.contains('portfolio-image')) {
+                        e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRjVGNUY3Ii8+CjxwYXRoIGQ9Ik0zMDAgMjAwTDM1MCAyNTBMMzAwIDMwMEwyNTAgMjUwTDMwMCAyMDBaIiBmaWxsPSIjMDA3QUZGIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iMzUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM4Njg2OEIiPk5vIGltYWdlPC90ZXh0Pgo8L3N2Zz4K';
+                    }
+                }, true);
             }
 
             #setupScrollHandler() {
@@ -1017,11 +1018,13 @@
 
             #openContactModal() {
                 this.#contactModal.style.display = 'flex';
+                this.#contactModal.setAttribute('aria-hidden', 'false');
                 document.body.style.overflow = 'hidden';
             }
 
             #closeContactModal() {
                 this.#contactModal.style.display = 'none';
+                this.#contactModal.setAttribute('aria-hidden', 'true');
                 document.body.style.overflow = 'auto';
             }
 
@@ -1050,7 +1053,6 @@
         // Инициализация приложения
         document.addEventListener('DOMContentLoaded', () => {
             const app = new AppleServiceApp();
-            app.loadTheme();
         });
 
         // Service Worker регистрация (опционально)
